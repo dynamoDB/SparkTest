@@ -4,7 +4,6 @@ import java.io.File;
 
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.ConnectionConfiguration;
-import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
@@ -17,7 +16,7 @@ public class SendFile {
 	private static final String service = "wswincnhz0860";
 	private static final String userName = "sl";
 	private static final String password = "carrot";
-	private static final String to = "leishi";
+	private static final String to = "test";
 	private static final String filePath = "E:\\sendImageTest.jpg";
 
 	public static void main(String[] args) throws XMPPException {
@@ -40,27 +39,24 @@ public class SendFile {
 		}
 		connection.login(userName, password, "tiantian");
 		Presence presence = new Presence(Presence.Type.available);
-		connection.sendPacket(presence);// 上线了
-		Presence pre = connection.getRoster().getPresence(userName + "@" + service);
-		System.out.println(pre);
-		Roster rosters=connection.getRoster();
+		connection.sendPacket(presence);
 	
-		if (pre.getType() != Presence.Type.unavailable) {
-			// 创建文件传输管理器
-			FileTransferManager manager = new FileTransferManager(connection);
-			// 创建输出的文件传输
-			OutgoingFileTransfer transfer = manager
-					.createOutgoingFileTransfer(pre.getFrom());
-			// 发送文件
-			transfer.sendFile(new File(filePath), "Image");
-			while (!transfer.isDone()) {
-				if (transfer.getStatus() == FileTransfer.Status.in_progress) {
-					// 可以调用transfer.getProgress();获得传输的进度　
-					System.out.println(transfer.getStatus());
-					System.out.println(transfer.getProgress());
-					System.out.println(transfer.isDone());
-				}
-			}
-		}
+		
+		File file = new File(filePath);
+		FileTransferManager transfer = new FileTransferManager(connection);
+		OutgoingFileTransfer out = transfer
+				.createOutgoingFileTransfer(to+"@"+service
+						+ "/tiantian");//
+
+		out.sendFile(file, file.getName());
+
+		System.out.println("等待对方接受文件...");
+//		while (!out.isDone()) {
+//			if (out.getStatus() == FileTransfer.Status.in_progress) {
+//				// 可以调用transfer.getProgress();获得传输的进度　
+//				System.out.println(Math.floor((out.getProgress()*100))+"%");
+//			}
+//		}
+		System.out.println("发送文件结束");
 	}
 }

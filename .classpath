@@ -4,7 +4,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="F:/JAR/smackx-jingle.jar"/>
 	<classpathentry kind="lib" path="F:/JAR/smack.jar" sourcepath="F:/JAR-SRC/smack-src.jar"/>
-	<classpathentry kind="lib" path="F:/JAR/smackx.jar"/>
+	<classpathentry kind="lib" path="F:/JAR/smackx.jar" sourcepath="F:/JAR-SRC/asmack-src.jar"/>
 	<classpathentry kind="lib" path="F:/JAR/smackx-debug.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
